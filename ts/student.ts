@@ -13,8 +13,9 @@ students.push({id:4,name:"Lara",age:1009,lifestatus:false})
 console.log(students)
 
 const backup:student={id:students[2].id,name:students[2].name,lifestatus:students[2].lifestatus,age:students[2].age}
-const rename: (id:number,name:string) => student = (id, name) => {
-    const toUpdate:student = students.find(a=>a.id===id)
+const rename: (id:number,name:string) => student | undefined = (id, name) => {
+    const toUpdate:student | undefined= students.find(a=>a.id===id)
+    // @ts-ignore
     toUpdate.name=name
     return toUpdate
 }
@@ -43,8 +44,9 @@ EIGENEN TYP erstellen
 const backup2:student={id:students[2].id,name:students[2].name,lifestatus:students[2].lifestatus,age:students[2].age}
 const rename2: (id:number,name:string) => student = (id, name) => {
 
-    let toUpdate:student = students.find((a)=>(a.id===id))
+    let toUpdate:student | undefined = students.find((a)=>(a.id===id))
     let i=students.findIndex(a=>a===toUpdate)//2
+    // @ts-ignore
     const forReplace:student = {id:id,name:name,lifestatus:toUpdate.lifestatus,age:toUpdate.age}
     students[i]=forReplace
     return forReplace

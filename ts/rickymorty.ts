@@ -1,6 +1,9 @@
-const rickAndMorty = {
+const rickAndMorty =
+    {
     "info": {"count": 826, "pages": 42, "next": "https://rickandmortyapi.com/api/character?page=2", "prev": null},
-    "results": [{
+    "results":
+        [
+        {
         "id": 1,
         "name": "Rick Sanchez",
         "status": "Alive",
@@ -13,7 +16,8 @@ const rickAndMorty = {
         "episode": ["https://rickandmortyapi.com/api/episode/1", "https://rickandmortyapi.com/api/episode/2", "https://rickandmortyapi.com/api/episode/3", "https://rickandmortyapi.com/api/episode/4", "https://rickandmortyapi.com/api/episode/5", "https://rickandmortyapi.com/api/episode/6", "https://rickandmortyapi.com/api/episode/7", "https://rickandmortyapi.com/api/episode/8", "https://rickandmortyapi.com/api/episode/9", "https://rickandmortyapi.com/api/episode/10", "https://rickandmortyapi.com/api/episode/11", "https://rickandmortyapi.com/api/episode/12", "https://rickandmortyapi.com/api/episode/13", "https://rickandmortyapi.com/api/episode/14", "https://rickandmortyapi.com/api/episode/15", "https://rickandmortyapi.com/api/episode/16", "https://rickandmortyapi.com/api/episode/17", "https://rickandmortyapi.com/api/episode/18", "https://rickandmortyapi.com/api/episode/19", "https://rickandmortyapi.com/api/episode/20", "https://rickandmortyapi.com/api/episode/21", "https://rickandmortyapi.com/api/episode/22", "https://rickandmortyapi.com/api/episode/23", "https://rickandmortyapi.com/api/episode/24", "https://rickandmortyapi.com/api/episode/25", "https://rickandmortyapi.com/api/episode/26", "https://rickandmortyapi.com/api/episode/27", "https://rickandmortyapi.com/api/episode/28", "https://rickandmortyapi.com/api/episode/29", "https://rickandmortyapi.com/api/episode/30", "https://rickandmortyapi.com/api/episode/31", "https://rickandmortyapi.com/api/episode/32", "https://rickandmortyapi.com/api/episode/33", "https://rickandmortyapi.com/api/episode/34", "https://rickandmortyapi.com/api/episode/35", "https://rickandmortyapi.com/api/episode/36", "https://rickandmortyapi.com/api/episode/37", "https://rickandmortyapi.com/api/episode/38", "https://rickandmortyapi.com/api/episode/39", "https://rickandmortyapi.com/api/episode/40", "https://rickandmortyapi.com/api/episode/41", "https://rickandmortyapi.com/api/episode/42", "https://rickandmortyapi.com/api/episode/43", "https://rickandmortyapi.com/api/episode/44", "https://rickandmortyapi.com/api/episode/45", "https://rickandmortyapi.com/api/episode/46", "https://rickandmortyapi.com/api/episode/47", "https://rickandmortyapi.com/api/episode/48", "https://rickandmortyapi.com/api/episode/49", "https://rickandmortyapi.com/api/episode/50", "https://rickandmortyapi.com/api/episode/51"],
         "url": "https://rickandmortyapi.com/api/character/1",
         "created": "2017-11-04T18:48:46.250Z"
-    }, {
+    },
+        {
         "id": 2,
         "name": "Morty Smith",
         "status": "Alive",
@@ -262,6 +266,51 @@ const rickAndMorty = {
         "created": "2017-11-04T22:34:53.659Z"
     }]
 }
+//console.log(rickAndMorty.info.pages)
 
+type api={info:{},results:[]}
+type status= "Alive"|"unknown"| "Dead"
+//type origin ={name: string, url: string}
+type location ={name: string, url: string}
+type charachter= {id:number,name:string,location:location,status:status};
+// schreibe eine function, die ein neues Array nur mit den lebenden Menschen erstellt
+const getAlives: (api) => charachter[] = (api) => {
+    const found:charachter[]=api.results.filter(
+        (val:charachter)=>val.status==="Alive"
+    )
+    const myClonedArray:charachter[] = [];
+    found.forEach(val => myClonedArray.push(Object.assign({}, val)));
+    return myClonedArray
+}
 
-console.log(rickAndMorty.info.pages)
+console.log("found alive:")
+getAlives(rickAndMorty).forEach(a=>console.log(a ))
+
+//schreibe eine function, die ein Array mit allen Namen zurückgibt
+const getNames: (api) => string[] = (api) => {
+    const found:string[]=api.results.map(
+        (val:charachter)=>val.name
+    )
+    return found
+}
+
+console.log("found names:")
+getNames(rickAndMorty).forEach(a=>console.log(a ))
+
+//schreibe eine function, die ein Array mit Objekten der Form {name: string, location:string}
+const getShort: (api) => {}[] = (api) => {
+    const found:charachter[]=api.results.filter(
+        (val:charachter)=>val.status==="Alive"
+    )
+    const myClonedArray: {}[] = [];
+
+    found.forEach(val =>{
+        // const bb:{name,location} = val
+        const b={name:val.name,location:val.location}
+        myClonedArray.push(b)
+    })
+    return myClonedArray
+}
+
+console.log("found short:")
+getShort(rickAndMorty).forEach(a=>console.log(a ))
